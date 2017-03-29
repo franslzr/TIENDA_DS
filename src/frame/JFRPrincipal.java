@@ -1,4 +1,3 @@
-
 package frame;
 
 import java.awt.Color;
@@ -6,6 +5,9 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
 import javax.swing.table.JTableHeader;
+import connections.conection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,18 +17,25 @@ public final class JFRPrincipal extends javax.swing.JFrame {
 
     boolean ventas, compras, productos, proveedores;
     boolean apagado, principal;
-    int x,y;
-    JTableHeader tHeadVentas,tHeadCompras,tHeadProductos,tHeadCompra,tHeadProveedores,tHeadDetalleCompra;
-    
+    int x, y;
+    JTableHeader tHeadVentas, tHeadCompras, tHeadProductos, tHeadCompra, tHeadProveedores, tHeadDetalleCompra;
+
     public JFRPrincipal() {
         initComponents();
+        conection cn = new conection();
+        try {
+            cn.CrearConexion();
+        } catch (Exception ex) {
+//            Logger.getLogger(JFRPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Try again...");
+        }
         tHeadVentas = tblProductosVender.getTableHeader();
-        tHeadCompras=tblCompras.getTableHeader();
-        tHeadProductos=jtblProductos.getTableHeader();
-        tHeadCompra=tblCompra.getTableHeader();
-        tHeadProveedores=tblProveedores.getTableHeader();
-        tHeadDetalleCompra=tblDetalleCompra.getTableHeader();
-        
+        tHeadCompras = tblCompras.getTableHeader();
+        tHeadProductos = jtblProductos.getTableHeader();
+        tHeadCompra = tblCompra.getTableHeader();
+        tHeadProveedores = tblProveedores.getTableHeader();
+        tHeadDetalleCompra = tblDetalleCompra.getTableHeader();
+
         cabezera();
         ventas = compras = productos = proveedores = apagado = false;
         btnVentas.setBorder(null);
@@ -40,72 +49,78 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         Productos(false);
         Proveedores(false);
     }
-    
+
     /*  ---- Color a las cabeceras de las tablas ----  */
-    public void cabezera(){
+    public void cabezera() {
         Font fuente = new Font("Tahoma", Font.BOLD, 12);
         tHeadVentas.setBackground(jpnBarraMenu.getBackground());
         tHeadVentas.setForeground(Color.WHITE);
         tHeadVentas.setFont(fuente);
-        
+
         tHeadCompras.setBackground(jpnBarraMenu.getBackground());
         tHeadCompras.setForeground(Color.WHITE);
         tHeadCompras.setFont(fuente);
-        
+
         tHeadProductos.setBackground(jpnBarraMenu.getBackground());
         tHeadProductos.setForeground(Color.WHITE);
         tHeadProductos.setFont(fuente);
-        
+
         tHeadCompra.setBackground(jpnBarraMenu.getBackground());
         tHeadCompra.setForeground(Color.WHITE);
         tHeadCompra.setFont(fuente);
-        
+
         tHeadProveedores.setBackground(jpnBarraMenu.getBackground());
         tHeadProveedores.setForeground(Color.WHITE);
         tHeadProveedores.setFont(fuente);
-        
+
         tHeadDetalleCompra.setBackground(jpnBarraMenu.getBackground());
         tHeadDetalleCompra.setForeground(Color.WHITE);
         tHeadDetalleCompra.setFont(fuente);
-        
+
     }
- 
-/*  ---- Visualización de imágenes en Menú ----  */
-    public void Principal(boolean estado){
-        if(!jpnProveedores.isVisible()){
-        jpnPrimero.setVisible(estado);
-        }else{
-      }
+
+    /*  ---- Visualización de imágenes en Menú ----  */
+    public void Principal(boolean estado) {
+        if (!jpnProveedores.isVisible()) {
+            jpnPrimero.setVisible(estado);
+        } else {
+        }
     }
-    public void Compras(boolean estado){
-        if(!jpnProveedores.isVisible()){
-        jpnSegundo.setVisible(estado);
-        }else{
-      }
+
+    public void Compras(boolean estado) {
+        if (!jpnProveedores.isVisible()) {
+            jpnSegundo.setVisible(estado);
+        } else {
+        }
     }
-    public void Ventas(boolean estado){
-        if(!jpnProveedores.isVisible()){
-        jpnTercero.setVisible(estado);
-        }else{
-      }
+
+    public void Ventas(boolean estado) {
+        if (!jpnProveedores.isVisible()) {
+            jpnTercero.setVisible(estado);
+        } else {
+        }
     }
-    public void Productos(boolean estado){
-        if(!jpnProveedores.isVisible()){
-        jpnCuarto.setVisible(estado);
-        }else{
-      }
+
+    public void Productos(boolean estado) {
+        if (!jpnProveedores.isVisible()) {
+            jpnCuarto.setVisible(estado);
+        } else {
+        }
     }
-    public void Proveedores(boolean estado){
-        if(!jpnProveedores.isVisible()){
-        jpnQuinto.setVisible(estado);
-        }else{
-      }
+
+    public void Proveedores(boolean estado) {
+        if (!jpnProveedores.isVisible()) {
+            jpnQuinto.setVisible(estado);
+        } else {
+        }
     }
-    public void apagado(){
+
+    public void apagado() {
         apagado = true;
-        jpnPrincipal.setVisible(false);  
+        jpnPrincipal.setVisible(false);
     }
-    public void apagado2(){
+
+    public void apagado2() {
         jpnProveedores.setVisible(false);
         jpnAgregarProv.setVisible(false);
         jpnModificarProveedor.setVisible(false);
@@ -1606,73 +1621,81 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBotonCerrarMouseClicked
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_lblBotonCerrarMouseClicked
 
     /*  ---- Animaciones de los botones del menú ----  */
     private void btnComprasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseEntered
-    /*  ---- Animación compras, mover ----  */
-        if(!compras)
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnCompras);
+        /*  ---- Animación compras, mover ----  */
+        if (!compras) {
+            Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnCompras);
+        }
         Principal(false);
         Compras(true);
     }//GEN-LAST:event_btnComprasMouseEntered
 
     private void btnComprasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseExited
-    /*  ---- Animación compras, volver posición anterior ----  */
-        if(!compras)
-        Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnCompras);
+        /*  ---- Animación compras, volver posición anterior ----  */
+        if (!compras) {
+            Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnCompras);
+        }
         Principal(true);
         Compras(false);
     }//GEN-LAST:event_btnComprasMouseExited
 
     private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered
-        if(!ventas)
+        if (!ventas) {
             Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnVentas);
-            Principal(false);
-            Ventas(true);
+        }
+        Principal(false);
+        Ventas(true);
     }//GEN-LAST:event_btnVentasMouseEntered
 
     private void btnVentasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseExited
-        if(!ventas)
-            Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnVentas);  
-            Principal(true);
-            Ventas(false);
+        if (!ventas) {
+            Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnVentas);
+        }
+        Principal(true);
+        Ventas(false);
     }//GEN-LAST:event_btnVentasMouseExited
 
     private void btnProductosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseEntered
-        if(!productos)
-            Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProductos);   
-            Principal(false);
-            Productos(true);
+        if (!productos) {
+            Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProductos);
+        }
+        Principal(false);
+        Productos(true);
     }//GEN-LAST:event_btnProductosMouseEntered
 
     private void btnProductosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseExited
-        if(!productos)
-            Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnProductos); 
-            Principal(true);
-            Productos(false);
+        if (!productos) {
+            Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnProductos);
+        }
+        Principal(true);
+        Productos(false);
     }//GEN-LAST:event_btnProductosMouseExited
 
     private void btnProveedoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseEntered
-        if(!proveedores)
-            Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);   
-            Principal(false);
-            Proveedores(true);
+        if (!proveedores) {
+            Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);
+        }
+        Principal(false);
+        Proveedores(true);
     }//GEN-LAST:event_btnProveedoresMouseEntered
 
     private void btnProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseExited
-        if(!proveedores)
-            Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnProveedores); 
-            Principal(true);
-            Proveedores(false);         
+        if (!proveedores) {
+            Animacion.Animacion.mover_izquierda(0, -126, 1, 2, btnProveedores);
+        }
+        Principal(true);
+        Proveedores(false);
     }//GEN-LAST:event_btnProveedoresMouseExited
 
     private void btnProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedoresMouseClicked
         apagado();
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);  
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProveedores);
         apagado2();
-        jpnProveedores.setVisible(true); 
+        jpnProveedores.setVisible(true);
     }//GEN-LAST:event_btnProveedoresMouseClicked
 
     /*  ---- Acción de botones, cambiar de pantallas (Paneles) ----  */
@@ -1684,7 +1707,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         Compras(false);
         Ventas(false);
         Productos(false);
-        Proveedores(false); 
+        Proveedores(false);
     }//GEN-LAST:event_btnHomeMouseClicked
 
     private void btnAgregarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarProveedorMouseClicked
@@ -1709,13 +1732,13 @@ public final class JFRPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoProductoActionPerformed
 
     private void btnSalirProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirProductosActionPerformed
-            jpnNuevoProducto.setVisible(false);
-            jpnProductos.setVisible(true);
+        jpnNuevoProducto.setVisible(false);
+        jpnProductos.setVisible(true);
     }//GEN-LAST:event_btnSalirProductosActionPerformed
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
         apagado();
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProductos);  
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnProductos);
         apagado2();
         jpnProductos.setVisible(true);
     }//GEN-LAST:event_btnProductosMouseClicked
@@ -1737,19 +1760,19 @@ public final class JFRPrincipal extends javax.swing.JFrame {
 
     private void btnComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprasMouseClicked
         apagado();
-        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnCompras);  
+        Animacion.Animacion.mover_derecha(-126, 0, 1, 2, btnCompras);
         apagado2();
         jpnCompras.setVisible(true);
     }//GEN-LAST:event_btnComprasMouseClicked
 
     /*  ---- Mover barra ----  */
     private void jpnBarraSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMousePressed
-        x = evt.getX(); 
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jpnBarraSuperiorMousePressed
 
     private void jpnBarraSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnBarraSuperiorMouseDragged
-         this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
     }//GEN-LAST:event_jpnBarraSuperiorMouseDragged
 
     private void btnAtrasDetalleCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasDetalleCompraMouseClicked
@@ -1947,7 +1970,7 @@ public final class JFRPrincipal extends javax.swing.JFrame {
         jpnProveedores.setVisible(false);
         jpnModificarProveedor.setVisible(true);
     }//GEN-LAST:event_btnModificarProveedorMouseClicked
-                                                                                                                                                                                                                              
+
     /**
      * @param args the command line arguments
      */
